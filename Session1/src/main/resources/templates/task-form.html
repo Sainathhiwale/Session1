@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Task Form</title>
+</head>
+<body>
+<h1>Task Form</h1>
+<form id="task-form">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title"><br><br>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description"></textarea><br><br>
+    <label for="assigned">Assigned:</label>
+    <input type="text" id="assigned" name="assigned"><br><br>
+    <label for="status">Status:</label>
+    <input type="text" id="status" name="status"><br><br>
+    <label for="author">Author:</label>
+    <input type="text" id="author" name="author"><br><br>
+    <button id="submit-btn">Save Task</button>
+</form>
+
+<div id="response"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+<script>
+    const form = document.getElementById('task-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const responseDiv = document.getElementById('response');
+
+    submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const task = {
+            title: document.getElementById('title').value,
+            description: document.getElementById('description').value,
+            assigned: document.getElementById('assigned').value,
+            status: document.getElementById('status').value,
+            author: document.getElementById('author').value
+        };
+
+        axios.post('/api/v1/task/save', task)
+            .then(response => {
+                responseDiv.innerHTML = `Task saved successfully! ID: ${response.data.id}`;
+            })
+            .catch(error => {
+                responseDiv.innerHTML = `Error saving task: ${error.message}`;
+            });
+    });
+</script>
+</body>
+</html>
