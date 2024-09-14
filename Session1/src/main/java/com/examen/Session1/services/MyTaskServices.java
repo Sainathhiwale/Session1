@@ -1,6 +1,7 @@
 package com.examen.Session1.services;
 
 import com.examen.Session1.domain.MyTask;
+import com.examen.Session1.exception.MyException;
 import com.examen.Session1.repository.MyTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,13 @@ public class MyTaskServices {
     }
 
     public MyTask getById(long id) {
-        return myTaskRepository.getReferenceById(id);
+        return myTaskRepository.findById(id).orElseThrow(()-> new MyException("NO record found with the id: "+id ));
+
     }
 
     public MyTask update(MyTask myTask) {
-//        MyTask dbRec=myTaskRepository.findById(myTask.getId()).get();
-//        dbRec.setDescription(myTask.getDescription());
+      MyTask dbRec=myTaskRepository.findById(myTask.getId()).get();
+       dbRec.setDescription(myTask.getDescription());
         return myTaskRepository.save(myTask);
     }
 
