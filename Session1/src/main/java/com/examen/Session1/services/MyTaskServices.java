@@ -22,7 +22,7 @@ public class MyTaskServices {
         return  myTaskRepository.findAll();
     }
 
-    public MyTask getById(long id) {
+    public MyTask getById(Long id) {
         return myTaskRepository.findById(id).orElseThrow(()-> new MyException("NO record found with the id: "+id ));
 
     }
