@@ -10,16 +10,12 @@ import lombok.*;
 @Entity
 @Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-public class MyTask {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String title;
-    private String description;
-    private String assigned;
-    private String status;
-    private String author;
+    private String name;
+    private String department;
+    private String address;
 }
