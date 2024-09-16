@@ -28,4 +28,9 @@ public class EmployeeServices {  //Business Logic Layer (Service)
     public Employee update(Employee employee) {
         return employeeRepository.save(employee);
     }
+
+    public String delete(Long id) {
+        employeeRepository.deleteById(id);
+        return "Records delete successfully";
+    }
 }
