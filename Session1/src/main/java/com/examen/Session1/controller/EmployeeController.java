@@ -50,15 +50,18 @@ public class EmployeeController {
     }
 
     @GetMapping("/get-all")
+    @Operation(summary = "Get all employees", description = "Retrieve a list of all employees")
     public ResponseEntity<List<Employee>> getAll(){
         return new ResponseEntity<>(employeeServices.getAll(),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "get single employee records",description = "retrieve the item from database")
     public ResponseEntity<Employee> getById(@PathVariable Long id){
         return new ResponseEntity<>(employeeServices.getById(id),HttpStatus.OK);
     }
     @PutMapping("/update")
+    @Operation(summary = "update employee record", description = "update the records")
     public ResponseEntity<Employee> update(@io.swagger.v3.oas.annotations.parameters.RequestBody(
                              content ={
                                      @Content(
@@ -79,6 +82,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeServices.update(employee),HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
+    @Operation(summary = "delete the single employee records", description = "delete the records")
     public ResponseEntity<String>delete(@PathVariable Long id){
         return new ResponseEntity<>(employeeServices.delete(id),HttpStatus.OK);
     }
