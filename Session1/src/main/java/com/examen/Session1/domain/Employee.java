@@ -10,6 +10,8 @@ import lombok.*;
 @Entity
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Employee {
     @Id
