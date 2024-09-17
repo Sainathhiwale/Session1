@@ -5,6 +5,7 @@ import com.examen.Session1.services.EmployeeServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,14 +25,17 @@ public class EmployeeController {
     ));
 
     @GetMapping("")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Employee>> getall(){
         return new ResponseEntity<>(employeeList,HttpStatus.OK);
     }
+    @PostMapping("/save")
     public ResponseEntity<Employee> save(@RequestBody Employee employee){
         return new ResponseEntity<>(employeeServices.save(employee), HttpStatus.CREATED);
     }
 
     @GetMapping("/get-all")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<Employee>> getAll(){
         return new ResponseEntity<>(employeeServices.getAll(),HttpStatus.OK);
     }
