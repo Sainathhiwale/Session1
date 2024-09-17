@@ -25,7 +25,6 @@ public class EmployeeController {
     ));
 
     @GetMapping("")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Employee>> getall(){
         return new ResponseEntity<>(employeeList,HttpStatus.OK);
     }
@@ -35,7 +34,6 @@ public class EmployeeController {
     }
 
     @GetMapping("/get-all")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<Employee>> getAll(){
         return new ResponseEntity<>(employeeServices.getAll(),HttpStatus.OK);
     }
