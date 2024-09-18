@@ -16,7 +16,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/employee")
+@RequestMapping("/api/employee")
 public class EmployeeController {
     private EmployeeServices employeeService;
     @GetMapping("")
