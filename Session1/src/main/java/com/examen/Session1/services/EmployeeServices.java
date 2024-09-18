@@ -13,7 +13,8 @@ import java.util.List;
 
 @Service
 public class EmployeeServices {  //Business Logic Layer (Service)
-
+    @Autowired
+    EmployeeRepository employeeRepository;
     List<Employee> employeeList=new ArrayList<>(Arrays.asList(
             Employee.builder().name("user1").department("IT").address("Pune").build(),
             Employee.builder().name("user2").department("IT").address("Pune").build(),
@@ -21,11 +22,12 @@ public class EmployeeServices {  //Business Logic Layer (Service)
             Employee.builder().name("user4").department("IT").address("Pune").build()
 
     ));
-    public List<Employee> getAll() {
+
+    public List<Employee> getAllUser() {
         return employeeList;
     }
-   /* @Autowired
-    EmployeeRepository employeeRepository;
+
+
 
     public Employee save(Employee employee){
       return  employeeRepository.save(employee);
@@ -46,5 +48,5 @@ public class EmployeeServices {  //Business Logic Layer (Service)
     public String delete(Long id) {
         employeeRepository.deleteById(id);
         return "Records delete successfully";
-    }*/
+    }
 }

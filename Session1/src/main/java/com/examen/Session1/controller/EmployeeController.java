@@ -14,14 +14,19 @@ import java.util.Arrays;
 import java.util.List;
 
 
-@AllArgsConstructor
 @RestController
-@RequestMapping("/api/employee")
+@RequestMapping("/post/employee")
 public class EmployeeController {
-    private EmployeeServices employeeService;
+    @Autowired
+     EmployeeServices employeeService;
+
     @GetMapping("")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Employee>> getAll(){
-        return new ResponseEntity<>(employeeService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(employeeService.getAllUser(), HttpStatus.OK);
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee){
+        return new ResponseEntity<>(employeeService.save(employee), HttpStatus.OK);
     }
 }

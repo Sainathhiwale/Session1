@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class JwtResponse {
+public class UserResponse {
     String jwtToken;
     String username;
 
