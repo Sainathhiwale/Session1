@@ -1,7 +1,7 @@
 package com.examen.Session1.controller;
 
-import com.examen.Session1.domain.JwtRequest;
-import com.examen.Session1.domain.JwtResponse;
+import com.examen.Session1.domain.UserMaster;
+import com.examen.Session1.domain.UserResponse;
 import com.examen.Session1.security.JwtHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth/login")
+@RequestMapping("/auth")
 public class AuthController {
+
 
     @Autowired
     AuthenticationManager manager;
@@ -26,13 +27,14 @@ public class AuthController {
     @Autowired
     UserDetailsService userDetailsService;
 
-    @PostMapping("")
-    public ResponseEntity<JwtResponse> auth(@RequestBody JwtRequest request){
+
+    @PostMapping("/login")
+    public ResponseEntity<UserResponse> auth(@RequestBody UserMaster request){
         doAuthenticate(request.getUsername(),request.getPassword());
         UserDetails userDetails=userDetailsService.loadUserByUsername(request.getUsername());
-        String toke=jwtHelper.generateToken(userDetails);
-        JwtResponse response=JwtResponse.builder()
-                .jwtToken(toke)
+        String token=jwtHelper.generateToken(userDetails);
+        UserResponse response= UserResponse.builder()
+                .jwtToken(token)
                 .username(userDetails.getUsername())
                 .build();
         return new ResponseEntity<>(response, HttpStatus.OK);
