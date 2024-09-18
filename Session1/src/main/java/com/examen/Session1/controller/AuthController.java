@@ -25,6 +25,7 @@ public class AuthController {
     JwtHelper jwtHelper;
     @Autowired
     UserDetailsService userDetailsService;
+
     @PostMapping("")
     public ResponseEntity<JwtResponse> auth(@RequestBody JwtRequest request){
         doAuthenticate(request.getUsername(),request.getPassword());
